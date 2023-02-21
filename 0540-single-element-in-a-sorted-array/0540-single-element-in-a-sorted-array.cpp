@@ -1,15 +1,22 @@
 class Solution {
 public:
     int singleNonDuplicate(vector<int>& nums) {
-        int left = 0, right = nums.size() - 1;
-        while(left < right){
-            int mid = (left + right)/2;
-            if((mid % 2 == 0 && nums[mid] == nums[mid + 1]) || (mid % 2 == 1 && nums[mid] == nums[mid - 1]))
-                left = mid + 1;
-            else
-                right = mid;
+        // support variables
+        int lmt = nums.size() - 1, mid;
+        // binary search
+        for (int l = 0, r = lmt, prev, nxt; l <= r;) {
+            // updating loop variables
+            mid = (l + r) >> 1;
+            prev = mid ? nums[mid - 1] : nums[mid] - 1;
+            nxt = mid != lmt ? nums[mid + 1] : nums[mid] + 1;
+            // checking the element pointed by mid:
+            // match
+            if (nums[mid] != prev && nums[mid] != nxt) return nums[mid];
+            // too high
+            else if (nums[mid] != (mid & 1 ? prev : nxt)) r = mid - 1;
+            // too low
+            else l = mid + 1;
         }
-        
-        return nums[left];
+        return nums[mid];
     }
 };
