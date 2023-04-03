@@ -4,7 +4,7 @@ public:
         sort(p.begin(),p.end());
         int i = 0;
         int j = p.size() - 1;
-        int count = 0;
+        int c = 0;
         while(i <= j)
         {   
             if(p[i] + p[j] <= l)
@@ -14,8 +14,8 @@ public:
             }
             else
                 j--;   
-            count++;  
+            c++;  
         }
-        return count;   
+        return c;   
     }
 };
