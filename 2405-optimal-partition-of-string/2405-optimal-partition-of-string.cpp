@@ -1,18 +1,25 @@
 class Solution {
 public:
     int partitionString(string s) {
-        set<char>st;
-        int g=1;
-        for(int i=0;i<s.size();i++){
-            if(st.find(s[i])!=st.end()){
-                g++;
-                st.clear();
-                st.insert(s[i]);
-            }
-            else {
-                st.insert(s[i]);
+        int n = s.length();
+        if(n==1)
+            return 1;
+        
+        int ans = 0;
+        set<char>freq; 
+        freq.insert(s[0]);
+
+        for(int i=1; i<n ;i++){
+            if(freq.find(s[i]) == freq.end() )
+                freq.insert(s[i]);
+            
+            else
+            {
+                ans++;
+                freq.clear();
+                freq.insert(s[i]);
             }
         }
-        return g;
+        return ans+1;
     }
 };
