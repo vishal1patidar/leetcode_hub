@@ -18,6 +18,6 @@ public:
         long res = long(a + b) * (a - b + 1) / 2;
         b = max(a - ((n - 1) - index), 0);
         res += long(a + b) * (a - b + 1) / 2;
-        return res - a;
+        return res-a;
     }
 };
