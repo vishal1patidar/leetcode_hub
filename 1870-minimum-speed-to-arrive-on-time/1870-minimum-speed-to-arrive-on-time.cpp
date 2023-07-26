@@ -1,31 +1,33 @@
 class Solution {
- bool canReachInTime(const vector<int>& dist, const double hour, int speed)
-    {
-        double time = 0;
-        for (int i = 0; i < dist.size() - 1; ++i)
-            time += ((dist[i] + speed - 1) / speed);
-        
-        time += ((double)dist.back()) / speed;
-        return time <= hour;
-    }
-    
 public:
-    int minSpeedOnTime(vector<int>& dist, double hour)
-    {
-        int N = dist.size();
-        if (hour <= (double)(N - 1))
-            return -1;
-        
-        int lo = 1, hi = 1e7, mi;
-        while (lo < hi)
-        {
-            mi = (lo + hi) / 2;
-            if (canReachInTime(dist, hour, mi))
-                hi = mi;
+    bool ispossible(vector<int>& dist,int speed,double hour){
+        double ans=0;
+        for(int i=0;i<dist.size();i++){
+            double d=dist[i]*1.0/speed;
+            if(i!=dist.size()-1)
+            ans=ans+ceil(d);
             else
-                lo = mi + 1;
+            ans+=d;
+            if(ans>hour)
+            return false;
         }
-        
-        return hi;
+       if(ans<=hour)
+       return true;
+       return false;
+    }
+    int minSpeedOnTime(vector<int>& dist, double hour) {
+        int i=1;
+        int j=1e7;
+        int minspeed=-1;
+        while(i<=j){
+            int mid=i+(j-i)/2;
+            if(ispossible(dist,mid,hour)){
+               minspeed=mid;
+               j=mid-1;
+            }
+            else
+            i=mid+1;
+        }
+        return minspeed;
     }
 };
