@@ -9,6 +9,9 @@ public:
                 dp[j]=min(dp[j],dp[left]+1);
             }
         }
-        return dp[n]==n+5 ? -1:dp[n];
+         if (dp[n] == n+5) {
+            return -1;
+        }
+        return dp[n];
     }
 };
