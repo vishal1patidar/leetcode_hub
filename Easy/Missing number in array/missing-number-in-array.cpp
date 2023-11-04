@@ -14,14 +14,16 @@ class Solution{
   public:
     int missingNumber(vector<int>& array, int n) {
         // Your code goes here
-         int tot=(n*(n+1))/2;
-        int sum=0;
-        for(int i=0;i<n-1;i++){
-            sum+=array[i];
+           sort(array.begin(), array.end());
+        for(int i =0; i<n;i++) {
+            if(array[i] != i+1) {
+                return i+1;
+            }
         }
-        int res=tot-sum;
-        return res;
     }
+
+
+    
 };
 
 //{ Driver Code Starts.
